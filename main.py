@@ -45,4 +45,9 @@ frame1.pack()
 x = tk.Radiobutton(frame1, text="CMD", variable=var, value=1, command=getc).pack(side="left")
 y = tk.Radiobutton(frame1, text="Powershell", variable=var, value=2, command=getc).pack(side="left")
 
+
+comm_label = tk.StringVar()
+comm_entry = tk.Entry(root,textvariable=comm_label)
+comm_entry.place(x = 10, y = 440, width=775, height=100)
+
 root.mainloop()

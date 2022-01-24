@@ -31,14 +31,18 @@ def getc() :
         return "powershell"
 
 
-def com(comm) :
-    type = getc()
-    process=subprocess.Popen([type,comm],stdout=subprocess.PIPE)
-    result=process.communicate()[0].splitlines()
+def PrintList(result) :
     for i,j in enumerate(result) :
         x = j.decode("utf-8")
         list.insert(i, j)
 
+
+def com(comm) :
+    type = getc()
+    process=subprocess.Popen([type,comm],stdout=subprocess.PIPE)
+    result=process.communicate()[0].splitlines()
+    return result
+    
 
 frame1 = tk.Frame(root)
 frame1.pack()

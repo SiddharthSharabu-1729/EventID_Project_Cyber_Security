@@ -38,20 +38,40 @@ def PrintList(result) :
 
 
 def com(comm) :
-    type = getc()
-    process=subprocess.Popen([type,comm],stdout=subprocess.PIPE)
+    #type = getc()
+    process=subprocess.Popen(["powershell",comm],stdout=subprocess.PIPE)
     result=process.communicate()[0].splitlines()
-    return result
+    PrintList(result)
     
 
 frame1 = tk.Frame(root)
 frame1.pack()
-x = tk.Radiobutton(frame1, text="CMD", variable=var, value=1, command=getc).pack(side="left")
+xx = tk.Radiobutton(frame1, text="CMD", variable=var, value=1, command=getc).pack(side="left")
 y = tk.Radiobutton(frame1, text="Powershell", variable=var, value=2, command=getc).pack(side="left")
 
 
 comm_label = tk.StringVar()
 comm_entry = tk.Entry(root,textvariable=comm_label)
-comm_entry.place(x = 10, y = 520, width=775, height=100)
+comm_entry.place(x = 10, y = 570, width=700, height=100)
+
+def funn() :
+    radio = var.get()
+    print(radio)
+    if radio == 1 :
+        #process=subprocess.Popen(["CMD",comm_entry.get()],stdout=subprocess.PIPE)
+        #result=process.communicate()[0].splitlines()
+        result = os.popen(comm_entry.get())
+        #list.insert(END,result)
+        for i in result :
+            list.insert(END,i)
+    elif radio == 0 :
+        #list.delete(0, END)
+        list.insert(END,"Please Select CMD or Powershell")
+    elif radio == 2 :
+        com(comm_entry.get())
+
+
+but = tk.Button(root,text="Run",height=6,width=9,command=funn)
+but.place(x=718,y=570)
 
 root.mainloop()
